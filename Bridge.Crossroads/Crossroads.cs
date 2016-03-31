@@ -44,6 +44,7 @@ namespace Bridge.Crossroads
 
     [External]
     [Namespace(false)]
+    [Name("crossroads")]
     public static class Crossroads
     {
         [Name("NORM_AS_ARRAY")]
