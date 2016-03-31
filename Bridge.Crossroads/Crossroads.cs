@@ -9,43 +9,8 @@ namespace Bridge.Crossroads
 {
     [External]
     [Namespace(false)]
-    public class Router
-    {
-        public extern Route AddRoute(string pattern);
-        public extern Route AddRoute(string pattern, Delegate handler);
-        public extern Route AddRoute(string pattern, Delegate handler, int priority);
-
-        public extern void RemoveRoute(Route route);
-
-        public extern void RemoveAllRoutes();
-
-        public extern void Parse(string request);
-        public extern void Parse(string request, object[] defaultArgs);
-
-        public extern int GetNumRoutes();
-
-        public Signal<string> Bypassed;
-
-        public Signal<string, dynamic> Routed;
-
-        public extern Router Create();
-
-        public Func<string, dynamic, object> NormalizeFn;
-
-        public bool ShouldTypecast;
-
-        public bool IgnoreState;
-
-        public extern void Pipe(Router router);
-
-        public extern void Unpipe(Router router);
-
-    }
-
-    [External]
-    [Namespace(false)]
     [Name("crossroads")]
-    public static class Crossroads
+    public class Crossroads
     {
         [Name("NORM_AS_ARRAY")]
         public static extern object NormalizeAsArray(string request, dynamic vals);
@@ -57,35 +22,39 @@ namespace Bridge.Crossroads
         public static string Version;
 
         public static bool Greedy;
+
         public static bool GreedyEnabled;
 
-        public static extern Route AddRoute(string pattern);
-        public static extern Route AddRoute(string pattern, Delegate handler);
-        public static extern Route AddRoute(string pattern, Delegate handler, int priority);
+        [Template("crossroads")]
+        public static Crossroads Instance;
 
-        public static extern void RemoveRoute(Route route);
+        public extern Route AddRoute(string pattern);
+        public extern Route AddRoute(string pattern, Delegate handler);
+        public extern Route AddRoute(string pattern, Delegate handler, int priority);
 
-        public static extern void RemoveAllRoutes();
+        public extern void RemoveRoute(Route route);
 
-        public static  extern void Parse(string request);
-        public static extern void Parse(string request, object[] defaultArgs);
+        public extern void RemoveAllRoutes();
 
-        public static extern int GetNumRoutes();
+        public  extern void Parse(string request);
+        public extern void Parse(string request, object[] defaultArgs);
 
-        public static Signal<string> Bypassed;
+        public extern int GetNumRoutes();
 
-        public static Signal<string, dynamic> Routed;
+        public Signal<string> Bypassed;
 
-        public static extern Router Create();
+        public Signal<string, dynamic> Routed;
 
-        public static Func<string, dynamic, object> NormalizeFn;
+        public extern Crossroads Create();
 
-        public static bool ShouldTypecast;
+        public Func<string, dynamic, object> NormalizeFn;
 
-        public static bool IgnoreState;
+        public bool ShouldTypecast;
 
-        public static extern void Pipe(Router router);
+        public bool IgnoreState;
 
-        public static extern void Unpipe(Router router);
+        public extern void Pipe(Crossroads router);
+
+        public static extern void Unpipe(Crossroads router);
     }
 }
